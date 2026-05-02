@@ -1,0 +1,67 @@
+_oracle.env
+apuntes.md
+*.xlsx
+*.xls
+*.log
+__pycache__/
+*.pyc
+
+# Archivos de entorno (todos los que comienzan con .env o contienen .env en el nombre)
+.env
+.env.*
+*.env
+.venv/
+venv/
+env/
+
+# Archivos
+*.md
+*test*
+*copy*
+!readme.md
+
+# Archivos de Excel
+*.xlsx
+*.xls
+*.csv
+
+# Archivos base de datos
+# *.sql
+
+# Archivos de log
+*.log
+*.tmp
+
+# Cachés de Python
+__pycache__/
+*.pyc
+*.py[cod]
+*$py.class
+
+# Directorios
+md/
+sh/
+pruebas/
+tests/
+
+# Configuración del sistema
+.DS_Store
+Thumbs.db
+
+.sonar
+.coverage
+.codex
+
+# Ignorar todo
+*
+
+# Permitir readers
+!readers/
+!readers/**
+
+# (opcional) permitir README o config
+!README.md
+!.gitignore
+
+
+
