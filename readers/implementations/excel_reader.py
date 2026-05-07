@@ -13,14 +13,13 @@ class ExcelReader(SheetableReader):
 
         sheet = options.sheet_name if options.sheet_name is not None else 0
 
-        df = pd.read_excel(
+        return pd.read_excel(
             file_path,
             sheet_name=sheet,
             skiprows=options.skiprows,
             nrows=options.nrows,
             header=options.header
         )        
-        return df
 
     def get_columns(self, file_path: Path, options: ExcelOptions | None = None) -> list[str]:
         options = options or ExcelOptions()

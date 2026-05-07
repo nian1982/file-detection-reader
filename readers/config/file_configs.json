@@ -1,49 +1,22 @@
 {
-  "configs": [
+  "configs": [    
     {
-      "id": "PRODUCTOS",
-      "description": "Catálogo de productos",
-      "columns": ["codigo", "nombre", "precio", "stock", "categoria"],
-      "required_columns": ["codigo", "nombre"]
-    },
-    {
-      "id": "CLIENTES",
-      "description": "Lista de clientes",
-      "columns": ["id", "nombre", "email", "telefono", "direccion"],
-      "required_columns": ["id", "nombre"]
-    },
-    {
-      "id": "INVENTARIO",
-      "description": "Inventario de almacén",
-      "columns": ["sku", "producto", "cantidad", "ubicacion", "fecha"],
-      "required_columns": ["sku", "cantidad"]
-    },
-    {
-      "id": "INVENTARIO",
-      "description": "Inventario de almacén",
-      "columns": ["sku", "producto", "cantidad", "ubicacion", "fecha"],
-      "required_columns": ["sku", "cantidad"]
-    },
-    {
-      "id": "CATALOGO",
-      "description": "Inventario de almacén",
-      "columns": [
-        "CLIENTE","IDENTIFICACION","CONTRATO","ACTIVO","VIGENCIA_INICIAL","VIGENCIA_FINAL","CONTACTO","DIRECCION","TELEFONO","CLASE_FD","ZONA_TRANSPORTE","SERVICIO","OPERACION","INSUMO","TIPO_FD","TAMANIO","MODULO","RANGO_INICIAL","RANGO_FINAL","TARIFA","VALOR_FIJO","FACTOR_CRECIMIENTO","RESPONSABLE","CIUDAD","SUCURSAL","CENTRO_COSOTO","PRIORIDAD"
+      "id": "VIGENCIA_CONTRATOS",
+      "active": true,
+      "description": "Relación de fechas para la vigencia de contratos",
+      "columns":   ["CODIGO_CLIENTE_SAP","NIT_CLIENTE","CLIENTE","CODIGO_CONTRATO","CODIGO_PARALELO","CALCULO_VENCIDOS","FECHA_INICIAL_VIGENCIA",   "FECHA_FINAL_VIGENCIA","SERVICIO","ACTIVO","PERIODO","TIPO_CARGO","INDICADOR_FACTURACUIB_PROP","CODIGO_DE_SERVICIO_SAP","NOMBRE_PRESENTACION",  "FECHA_FACTURACION","FECHA_INICIAL","FECHA_FINAL"
       ],
-      "required_columns": ["CLIENTE","IDENTIFICACION","CONTRATO","ACTIVO","VIGENCIA_INICIAL","VIGENCIA_FINAL","CONTACTO","DIRECCION","TELEFONO","CLASE_FD","ZONA_TRANSPORTE","SERVICIO","OPERACION","INSUMO","TIPO_FD","TAMANIO","MODULO","RANGO_INICIAL","RANGO_FINAL","TARIFA","VALOR_FIJO","FACTOR_CRECIMIENTO","RESPONSABLE","CIUDAD","SUCURSAL","CENTRO_COSOTO","PRIORIDAD"]
-    },
-    {
-      "id": "REPORTE_OPERACIONES",
-      "description": "Inventario de almacén",
-      "columns":   [
-        "Centro de Beneficio (CeBe)",
-        "Nombre Cebe",
-        "Cantidad",
-        "Tarifa",
-        "Ingreso No Reconocido en Valor Bajo NIIF (Antes de IVA)",
-        "IVA",
-        "Ingreso No Reconocido en Valor Bajo NIIF (IVA Incluido)"
+      "required_columns": ["CODIGO_CLIENTE_SAP","NIT_CLIENTE","CODIGO_PARALELO","FECHA_INICIAL_VIGENCIA","FECHA_FINAL_VIGENCIA","SERVICIO","PERIODO","TIPO_CARGO","CODIGO_DE_SERVICIO_SAP","FECHA_FACTURACION","FECHA_INICIAL","FECHA_FINAL"
       ]
-    }    
+    } , 
+    {
+      "id": "CATALOGO_PARTICULAR",
+      "active": true,
+      "description": "Data de parametria para cargos manuales",
+      "columns": ["CLIENTE","IDENTIFICACION","CONTRATO","ACTIVO","VIGENCIA_INICIAL","VIGENCIA_FINAL","CONTACTO","DIRECCION","TELEFONO","CLASE_FD","ZONA_TRANSPORTE","SERVICIO","OPERACION","INSUMO","TIPO_FD","TAMANIO","MODULO","RANGO_INICIAL","RANGO_FINAL","TARIFA","VALOR_FIJO","FACTOR_CRECIMIENTO","RESPONSABLE","CIUDAD","SUCURSAL","CENTRO_COSOTO","PRIORIDAD"
+      ],      
+      "required_columns": ["IDENTIFICACION","CONTRATO","VIGENCIA_INICIAL","VIGENCIA_FINAL","CONTACTO","DIRECCION","TELEFONO","CLASE_FD","ZONA_TRANSPORTE","SERVICIO","OPERACION","INSUMO","TIPO_FD","TAMANIO","MODULO","RANGO_INICIAL","RANGO_FINAL","TARIFA","VALOR_FIJO","FACTOR_CRECIMIENTO","RESPONSABLE","CIUDAD","SUCURSAL","CENTRO_COSOTO","PRIORIDAD"
+      ]
+    }
   ]
 }

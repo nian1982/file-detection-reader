@@ -1,38 +1,46 @@
-"""
-Ejemplo de uso del módulo readers con detección de archivos.
-"""
 from pathlib import Path
-from readers.implementations.csv_reader import CsvReader
-from readers.implementations.excel_reader import ExcelReader
-from readers.implementations.parquet_reader import ParquetReader
-from readers.services.detection_service import DetectionService
-from readers.models.detection_result import DetectionResult
-import json
+from utils.files import print_json_format
+from readers.models.csv_options import CsvOptions
+from readers.implementations.clean_df import clean_dataframe
+from readers.factories.reader_factory import ReaderFactory
+from readers.implementations.json_config_repository import JsonConfigRepository
+from readers.services.detection_file_service import DetectionFileService
 
 
 def main():
 
-    file_path = Path('/home/nian/Documents/softron/proyectos/dataexpress/docs/varios/2025-04-04 Plantilla de Trabajo para Reconocimiento Ingresos (5) ULT.xlsx')
+    catalogo = Path('/home/nian/Documents/softron/proyectos/reconociemiento/logistica/datasets/20260422/SR2104000_CATALOGO_PARTICULARADMIN_SIGLA_20260422160608.csv') # sep = ;
+    vigencias = Path('/home/nian/Documents/softron/proyectos/reconociemiento/logistica/datasets/20260422/SR2104000_VIGENCIA_CONTRATOADMIN_SIGLA_20260422163137.csv') # sep = |
 
-    config_path = Path('/mnt/mydisc/desarrollo/python/apis/solid/api/readers/config/file_configs.json')
+    file_path = catalogo
 
-    readers = {
-        ".xlsx": ExcelReader(),
-        ".csv": CsvReader()
-    }
+    options = CsvOptions(sep=';', encoding='latin1', nrows=5)
+    reader = ReaderFactory.create(file_path)
+    df = reader.read(file_path, options)
 
-    service = DetectionService(config_path, readers) 
+    repository = JsonConfigRepository(
+        Path("/mnt/mydisc/desarrollo/python/apis/solid/api/readers/config/file_configs.json")
+    )
 
-    result = service.detect_file_config(file_path)
+    service = DetectionFileService(repository)
 
-    print(json.dumps(result.to_dict(), indent=2, ensure_ascii=False))
-    
+    result = service.detect(file_path=file_path, df=df)
 
-    if result.success:
-        df = service.load_full_data(result)
+    print_json_format(result)
 
-        print("\nDATA REAL:")
-        print(df.head())   
+    read_options = CsvOptions(
+        sep=";",
+        encoding="latin1",
+        header=result.data_start_row,
+        usecols=result.required_columns
+    )
+
+    df = reader.read(file_path, read_options)
+
+    df = clean_dataframe(df)
+    print(df.head())
+
+
 
 
 

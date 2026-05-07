@@ -9,7 +9,7 @@ class DetectionResult:
     success: bool
     file_path: Path
     config_id: str | None = None
-    columns_matched: list[str] = field(default_factory=list)
+    required_columns: list[str] = field(default_factory=list)
     match_percentage: float = 0.0
     total_config_columns: int = 0
     
@@ -33,7 +33,7 @@ class DetectionResult:
             "file_path": str(self.file_path),
             "file_name": self.file_name or self.file_path.name,
             "config_id": self.config_id,
-            "columns_matched": self.columns_matched,
+            "required_columns": self.required_columns,
             "match_percentage": self.match_percentage,
             "total_config_columns": self.total_config_columns,
             "file_size": self.file_size,
