@@ -14,6 +14,7 @@ class DetectionResultFactory:
         config: FileConfig,
         row_index: int,
         detected_columns: list[str],
+        record_count: int | None = None,
     ) -> DetectionResult:
         return DetectionResult(
             success=True,
@@ -26,6 +27,7 @@ class DetectionResultFactory:
             file_size=file_path.stat().st_size,
             extension=file_path.suffix,
             data_start_row=row_index,
+            record_count=record_count,
             column_count=len(detected_columns),
         )
 

@@ -17,6 +17,17 @@
       ],      
       "required_columns": ["IDENTIFICACION","CONTRATO","VIGENCIA_INICIAL","VIGENCIA_FINAL","CONTACTO","DIRECCION","TELEFONO","CLASE_FD","ZONA_TRANSPORTE","SERVICIO","OPERACION","INSUMO","TIPO_FD","TAMANIO","MODULO","RANGO_INICIAL","RANGO_FINAL","TARIFA","VALOR_FIJO","FACTOR_CRECIMIENTO","RESPONSABLE","CIUDAD","SUCURSAL","CENTRO_COSOTO","PRIORIDAD"
       ]
+    }, 
+    {
+      "id": "TARIFAS_CLIENTE",
+      "active": true,
+      "description": "Calculo de tarifas de acuerdo a ciclos de facturación",
+      "columns": [
+        "id","cliente","identificacion","contrato","activo","vigencia_inicial","vigencia_final","contacto","direccion","telefono","clase_fd","zona_transporte","servicio","operacion","insumo","tipo_fd","tamanio","modulo","rango_inicial","rango_final","tarifa","valor_fijo","factor_crecimiento","responsable","ciudad","sucursal","centro_cosoto","prioridad","created_at","updated_at","created_by","active"
+      ],      
+      "required_columns": [
+        "identificacion","contrato","vigencia_inicial","vigencia_final","contacto","direccion","telefono","clase_fd","zona_transporte","servicio","operacion","insumo","tipo_fd","tamanio","modulo","rango_inicial","rango_final","tarifa","valor_fijo","factor_crecimiento","responsable","ciudad"
+      ]
     }
   ]
 }
