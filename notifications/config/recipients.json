@@ -1,0 +1,24 @@
+{
+  "lists": [
+    {
+      "id": "facturacion",
+      "recipients": ["dataexpress.pruebas@gmail.com", "nelsonrodriguez8203@gmail.com"],
+      "description": "Equipo de facturación"
+    },
+    {
+      "id": "gerencia",
+      "recipients": ["gerente@empresa.com", "subgerente@empresa.com"],
+      "description": "Gerencia general"
+    },
+    {
+      "id": "soporte",
+      "recipients": ["soporte1@empresa.com", "soporte2@empresa.com", "soporte3@empresa.com"],
+      "description": "Equipo de soporte técnico"
+    },
+    {
+      "id": "contabilidad",
+      "recipients": ["contador@empresa.com"],
+      "description": "Departamento de contabilidad"
+    }
+  ]
+}
