@@ -18,7 +18,7 @@ def main():
     result = processor.process(csv_path, csv_opts, preview_rows=5)
     if result.success and result.df is not None:
         print("CSV procesado:")
-        print_json_format(result.to_dict())
+        print_json_format(result)
         print(result.df)
     else:
         print(f"CSV: {result.error}")
