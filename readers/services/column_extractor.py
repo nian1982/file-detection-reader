@@ -6,7 +6,7 @@ class ColumnExtractor:
     def extract(self, row: pd.Series) -> list[str]:
         values = []
         for value in row.tolist():
-            normalized = str(value).strip().upper()
+            normalized = str(value).strip().upper().replace("\n", " ")
             if not normalized:
                 continue
             if normalized == "NAN":

@@ -17,6 +17,69 @@
       ],      
       "required_columns": ["IDENTIFICACION","CONTRATO","VIGENCIA_INICIAL","VIGENCIA_FINAL","CONTACTO","DIRECCION","TELEFONO","CLASE_FD","ZONA_TRANSPORTE","SERVICIO","OPERACION","INSUMO","TIPO_FD","TAMANIO","MODULO","RANGO_INICIAL","RANGO_FINAL","TARIFA","VALOR_FIJO","FACTOR_CRECIMIENTO","RESPONSABLE","CIUDAD","SUCURSAL","CENTRO_COSOTO","PRIORIDAD"
       ]
+    } , 
+    {
+      "id": "REPORTE_OPERACIONES",
+      "active": false,
+      "description": "Data de parametria para cargos manuales",
+      "columns": [
+          "ITEM",
+          "NIT",
+          "Código Cliente SAP",
+          "Cliente",
+          "Depósito",
+          "Fecha Desde",
+          "Fecha Hasta",
+          "Fecha Corte                      (Validación)",
+          "Ingreso No Reconocido en Días",
+          "Cuenta Ingreso",
+          "Cuenta CXC",
+          "Servicio",
+          "Centro de Beneficio (CeBe)",
+          "Nombre Cebe",
+          "Cantidad",
+          "Tarifa",
+          "Ingreso No Reconocido en Valor Bajo NIIF (Antes de IVA)",
+          "IVA",
+          "Ingreso No Reconocido en Valor Bajo NIIF (IVA Incluido)"
+      ],      
+      "required_columns": [
+          "Centro de Beneficio (CeBe)",
+          "Nombre Cebe",
+          "Cantidad",
+          "Tarifa"
+      ]
+    }, 
+    {
+      "id": "CEBES",
+      "active": true,
+      "description": "Data de parametria para cargos manuales",
+      "columns": [
+          "Costo/Gasto/Ventas",
+          "Sucursal",
+          "Plataforma",
+          "UEN / Gerencia",
+          "CeBes",
+          "Descripcion Largo",
+          "Descripcion Corta",
+          "Municipio",
+          "Inactivo",
+          "CIIU",
+          "CIIU"
+      ],      
+      "required_columns": [
+          "Costo/Gasto/Ventas",
+          "Sucursal",
+          "Plataforma",
+          "UEN / Gerencia",
+          "CeBes",
+          "Descripcion Largo",
+          "Descripcion Corta",
+          "Municipio",
+          "Inactivo",
+          "CIIU",
+          "CIIU"
+      ]
     }
   ]
 }

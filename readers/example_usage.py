@@ -1,47 +1,73 @@
 from pathlib import Path
-from utils.files import print_json_format
+
 from readers.models.csv_options import CsvOptions
-from readers.implementations.clean_df import clean_dataframe
-from readers.factories.reader_factory import ReaderFactory
-from readers.implementations.json_config_repository import JsonConfigRepository
-from readers.services.detection_file_service import DetectionFileService
+from readers.models.excel_options import ExcelOptions
+from readers.models.process_result import ProcessResult
+from readers.services.file_processor import FileProcessor
+
+
+CONFIG_PATH = Path(
+    "/mnt/mydisc/desarrollo/python/apis/solid/api/readers/config/file_configs.json"
+)
+
+
+def auto_process(
+            file_path: Path,
+            processor: FileProcessor,
+            preview_rows: int = 5,
+            verbose: bool = False,
+        ) -> ProcessResult:
+    ext = file_path.suffix.lower()
+    if ext == ".csv":
+        options = CsvOptions(nrows=preview_rows, sep=";", encoding="latin1")
+    elif ext in (".xlsx", ".xls"):
+        options = ExcelOptions(nrows=preview_rows)
+    else:
+        return ProcessResult(
+            success=False,
+            file_name=file_path.name,
+            extension=ext,
+            error=f"Formato no soportado: '{ext}'. Permitidos: .csv, .xlsx, .xls",
+        )
+
+    return processor.process(file_path, options, preview_rows=preview_rows, verbose=verbose)
 
 
 def main():
+    processor = FileProcessor(CONFIG_PATH)
 
-    catalogo = Path('/home/nian/Documents/softron/proyectos/reconociemiento/logistica/datasets/20260422/SR2104000_CATALOGO_PARTICULARADMIN_SIGLA_20260422160608.csv') # sep = ;
-    vigencias = Path('/home/nian/Documents/softron/proyectos/reconociemiento/logistica/datasets/20260422/SR2104000_VIGENCIA_CONTRATOADMIN_SIGLA_20260422163137.csv') # sep = |
-
-    file_path = catalogo
-
-    options = CsvOptions(sep=';', encoding='latin1', nrows=5)
-    reader = ReaderFactory.create(file_path)
-    df = reader.read(file_path, options)
-
-    repository = JsonConfigRepository(
-        Path("/mnt/mydisc/desarrollo/python/apis/solid/api/readers/config/file_configs.json")
+    xls_path = Path(
+        "/home/nian/Documents/desarrollo/softron/proyectos/dataexpress/"
+        "docs/varios/2025-04-04 Plantilla de Trabajo para Reconocimiento Ingresos (5) ULT.xlsx"
     )
 
-    service = DetectionFileService(repository)
-
-    result = service.detect(file_path=file_path, df=df)
-
-    print_json_format(result)
-
-    read_options = CsvOptions(
-        sep=";",
-        encoding="latin1",
-        header=result.data_start_row,
-        usecols=result.required_columns
+    csv_path = Path(
+        "/home/nian/Downloads/SR2104000_VIGENCIA_CONTRATOADMIN_SIGLA_20260422163137.csv"
     )
 
-    df = reader.read(file_path, read_options)
+    filepath = csv_path
 
-    df = clean_dataframe(df)
-    print(df.head())
+    result = auto_process(filepath, processor, preview_rows=15, verbose=False)
 
+    if result.success and result.df is not None:
+        print(f"Archivo procesado: {result.file_name}")
+        print(f"hoja: {result.sheet_name or 'N/A'}")
+        print(f"df:\n {result.df}")
+        print(f"COLUMNAS:\n {result.df.columns}")
+    else:
+        print(f"Error: {result.error}")
 
+    # archivos = [
+    #     Path("datos.csv"),
+    #     Path("reporte.xlsx"),
+    #     Path("desconocido.xyz"),
+    #     Path("archivo.xlsxs"),
+    # ]
 
+    # for ruta in archivos:
+    #     result = auto_process(ruta, processor)
+    #     estado = "OK" if result.success else "ERROR"
+    #     print(f"[{estado}] {result.file_name}: {result.error or 'Procesado correctamente'}")
 
 
 if __name__ == "__main__":

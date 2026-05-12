@@ -16,6 +16,7 @@ class JsonConfigRepository(ConfigRepository):
         return [
             FileConfig.from_dict(config)
             for config in data["configs"]
+            if config.get("active", True)
         ]
 
     def get_by_id(self, config_id: str) -> FileConfig | None:

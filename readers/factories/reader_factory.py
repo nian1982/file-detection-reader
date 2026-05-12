@@ -1,6 +1,8 @@
 from pathlib import Path
+
 from readers.implementations.csv_reader import CsvReader
 from readers.implementations.excel_reader import ExcelReader
+from readers.exceptions import UnsupportedFileFormatError
 
 
 class ReaderFactory:
@@ -18,6 +20,6 @@ class ReaderFactory:
         reader_class = cls.READERS.get(suffix)
 
         if not reader_class:
-            raise ValueError(f"Unsupported format: {suffix}")
+            raise UnsupportedFileFormatError(suffix)
 
         return reader_class()
